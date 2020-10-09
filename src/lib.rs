@@ -14,6 +14,12 @@ pub struct Node<T> {
     pub prev: Option<NonNull<Node<T>>>,
 }
 
+// OBS: we need this in order to use it for matecito
+#[cfg(feature = "matecito")]
+unsafe impl<T> Send for DoublyLinkedList<T> {}
+#[cfg(feature = "matecito")]
+unsafe impl<T> Sync for DoublyLinkedList<T> {}
+
 impl<T> DoublyLinkedList<T> {
     pub fn new() -> Self {
         Self {
@@ -351,4 +357,3 @@ mod tests {
         assert!(dll.is_empty());
     }
 }
-
